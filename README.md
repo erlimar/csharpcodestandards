@@ -56,7 +56,9 @@ namespace My.Namespace
 }
 ```
 
-## Solução 01
+## Solução 01: `NOMES`
+
+#### Mas primeiro... `uma historinha`...
 
 Ao tentar compilar o exemplo pela primeira vez você receberá um alerta informando erro de definição. O compilador irá informar que não é possível definir a função `public int count` porque já há uma definição no mesmo escopo com esse nome (no caso a variável membro `int count`). Também não consegue definir a variável local `int count = ...` porque já existe uma outra variável no mesmo escopo com o nome pretendido (o parâmetro `int count`).
 
