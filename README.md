@@ -35,7 +35,7 @@ Na seção Padrões, estarei descrevendo os padrões que já utilizo de alguma f
 No caso abaixo nós temos um membro de classe `int count`, um parâmetro `(int count)`, uma função `public int count` e uma variável de escopo `int count = 0`, ambas com o mesmo nome.
 Não é fácil distringuí-las, além do que haverá conflitos na utilização deste exemplo, experimente compilar.
 
-```cs
+```csharp
 namespace My.Namespace
 {
     public class MyClass
