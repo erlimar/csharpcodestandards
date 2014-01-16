@@ -29,11 +29,50 @@ Na seção Padrões, estarei descrevendo os padrões que já utilizo de alguma f
 # Rascunhos
 
 
-## Problema 01
+## Problema 1: `NOMES`
+> Como diferenciar variáveis locais, variáveis membro de classe, parâmetros de métodos e os próprios métodos, sem o uso de prefixos, e sem conflito de nomes?
+
+No caso abaixo nós temos um membro de classe `int count`, um parâmetro `(int count)`, uma função `public int count` e uma variável de escopo `int count = 0`, ambas com o mesmo nome.
+Não é fácil distringuí-las, além do que haverá conflitos na utilização deste exemplo, experimente compilar.
+
+```cs
+namespace My.Namespace
+{
+    public class MyClass
+    {
+        int count;
+
+        public int count(int count)
+        {
+            int count = count;
+            return count;
+        }
+    }
+}
+```
 
 ## Solução 01
 
+Ao tentar compilar o exemplo pela primeira vez você receberá um alerta informando erro de definição. O compilador irá informar que não é possível definir a função `public int count` porque já há uma definição no mesmo escopo com esse nome (no caso a variável membro `int count`). Também não consegue definir a variável local `int count = ...` porque já existe uma outra variável no mesmo escopo com o nome pretendido (o parâmetro `int count`).
 
+Podemos resolver o problema simplesmente utilizando prefixação, existem diversos padrões de pre e pós fixaxão para identificadores disponíveis por aí. Existem os que prefixam os identificadores de acordo com o tipo de dado que ele contém, para inteiros usa-se o prefixo `i`, para double `d`, string `s`, métodos `m`, e assim por diante. Há ainda os que separam os prefixos do nome de identificador usando `_` (underline), outros por `Capitalização` (prefixo minúsculo e primeiro caractere do identificador em Maiúsculo). Ficaria assim: `i_nome` ou `iNome`.
+
+Isso resolveria parte do problema. Suponhamos que utilizaremos a prefixação citada acima, separando o nome do identificador por `_` (underline). Teríamos o seguinte resultado:
+
+```csharp
+namespace My.Namespace
+{
+    public class MyClass
+    {
+        int i_count;
+
+        public int m_count(int i_count)
+        {
+            int i_count = i_count;
+        }
+    }
+}
+```
 
 Padrões
 =========
