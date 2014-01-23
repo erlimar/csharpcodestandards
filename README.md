@@ -1,9 +1,7 @@
-
 C# Code Standards
 =================
 
 Este é um documento de anotações pessoais com relação a forma como escrevo códigos fontes na linguagem C#. Talvez possa ser utilizado como uma referência por mais alguém na adotação de padronização em escrita de códigos nessa linguagem, mas a princípio é somente um rascunho sem mais pretenções.
-
 
     Copyright (C) 2014 Erlimar Silva Campos (eu@erlimar.com)
     Todos os direitos reservados
@@ -163,11 +161,10 @@ public class Program
 ```
 
 O resultado é esse:
-```
-p_count: 0
-Retorno: 6
-p_count: 0
-```
+
+    p_count: 0
+    Retorno: 6
+    p_count: 0
 
 Veja que o retorno do método está certo, `Retorno: 6`. Isso porque estamos informando o valor `5` e ele está retornando o valor calculado `6` (incrementado) imediatamente. Mas veja também que o parâmetro `p_count` que é o nosso contador guardado, não está sendo modificado.
 
@@ -177,7 +174,7 @@ Perceba que neste caso o compilador está fazendo exatamente o que a linguagem d
 
 O compilador fez exatamente o que está programado para fazer, mas ***nós*** fomos induzidos ao erro, e deixamos um erro básico **quebrar** nosso código.
 
-Vamos melhorar ainda mais nosso *"siteminha de prefixação"*. Já que distinguimos entre as variáveis locais das demais variáveis. Vamos também distinguir entre variáveis locais dos parâmetros. Podemos prefixar os parâmetros com `pv` (de parameter variable - variável de parâmetro) ao invés de somente `v`.
+Vamos melhorar ainda mais nosso *"siteminha de prefixação"*. Já que distinguimos entre as variáveis locais das demais variáveis, vamos também distinguir entre variáveis locais dos parâmetros. Podemos prefixar os parâmetros com `pv` (de parameter variable - variável de parâmetro) ao invés de somente `v`.
 
 Vejamos como fica isso no código:
 
@@ -208,7 +205,70 @@ namespace My.Namespace
 
 Agora sim! Compilou e está fazendo exatamente o que queremos. O problema agora está resolvido de vez.
 
+###`NOTA`
 
+O objetivo é chegar a um exemplo de código bastante padronizado, próximo ao seguinte:
+
+```csharp
+namespace My.Namespace
+{
+    public class MyClass
+    {
+        int counter;
+
+        public int Count(int counter)
+        {
+            int counter_ = counter;
+            counter_++;
+            this.counter = counter_;
+            return this.counter;
+
+            // "counter_" é preferível ao invés de "_counter" pelo fato de que
+            // "_" não faz parte do nome da variável, assim, deduzimos que o nome
+            // da variável é "counter" quando retiramos o complemento "_".
+            //
+            // Daahhhh... E daí?
+            //
+            // Daí que, se retiramos o complemento do nome da variável ele deve
+            // continuar sendo um nome válido de variável.
+            //
+            // (imagine o caso onde você tem uma ferramenta que gera a documentação
+            // automática da definição de seus programas lendo o código fonte. Daí
+            // essa ferramenta retira esses "complementos" e exibe somente o que é
+            // relevante, ou seja, o nome da variável)
+            //
+            // E o que é um nome válido de variável?
+            // Para a maioria das linguagens de programação é um nome que "inicia
+            // com um '_' (underline) ou um caractere alfa (letras) minúsculo ou 
+            // maiúsculo (a..zA..Z) sem nenhum símbolo especial e segue sem
+            // espaçamentos com demais caracteres alfanuméricos (letras e números),
+            // às vezes com limite na quantidade de caracteres.
+            //
+            // Portanto "_1variavel" é válido, mas "1variavel" NÃO É VÁLIDO, porque
+            // inicia com um número (diferente de letra ou '_' underline, da mesma
+            // forma que "-variavel" também é um nome inválido.
+            //
+            // E como dissemos anteriormente: se retiramos o complemento do nome da
+            // variável ele deve continuar sendo um nome válido de variável.
+            //
+            // Portanto, se usarmos o complemento "_" de forma pré-fixada estamos
+            // dando margem para erros, porque isso permitiria você usar
+            // "_7passo", o que sem o complemento seria a variável "7passo", ou
+            // seja, um nome inválido.
+            //
+            // Agora, se usarmos o complemento "_" de forma pós-fixada corrigimos
+            // esse "BUG", porque ao tentar criar essa variável tentaríamos usar
+            // "7passo_" para uma variável "7passo" e o compilador acusaria o erro.
+
+        }
+
+        public int Counter
+        {
+            get { return this.counter; }
+        }
+    }
+}
+```
 
 Padrões
 =========
