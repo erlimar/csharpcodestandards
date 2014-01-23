@@ -58,29 +58,38 @@ namespace My.Namespace
 
 ## Solução 01: `NOMES`
 
-#### Mas primeiro... `uma historinha`...
+#### Mas primeiro... `uma estorinha`...
 
-Ao tentar compilar o exemplo pela primeira vez você receberá um alerta informando erro de definição. O compilador irá informar que não é possível definir a função `public int count` porque já há uma definição no mesmo escopo com esse nome (no caso a variável membro `int count`). Também não consegue definir a variável local `int count = ...` porque já existe uma outra variável no mesmo escopo com o nome pretendido (o parâmetro `int count`).
+Ao tentar compilar o exemplo pela primeira vez, o compilador irá informar que não é possível definir a função `public int count()` porque já há uma definição no mesmo escopo com esse nome (no caso a propriedade `public int count{}`).
 
-Podemos resolver o problema simplesmente utilizando prefixação, existem diversos padrões de pre e pós fixaxão para identificadores disponíveis por aí. Existem os que prefixam os identificadores de acordo com o tipo de dado que ele contém, para inteiros usa-se o prefixo `i`, para double `d`, string `s`, métodos `m`, e assim por diante. Há ainda os que separam os prefixos do nome de identificador usando `_` (underline), outros por `Capitalização` (prefixo minúsculo e primeiro caractere do identificador em Maiúsculo). Ficaria assim: `i_nome` ou `iNome`.
+Podemos resolver o problema simplesmente utilizando prefixação. Existem diversos padrões de pré e pós fixação disponíveis por aí. Existem os que prefixam os identificadores de acordo com o tipo de dado que ele contém, prefixo `i` para inteiros, `d` para double, `s` para string, e etc. Ainda existem os que prefixam os identificadores de acordo com o tipo do item, `v` para variáveis, `p` para propriedades, `m` para métodos, e assim por diante.
 
-Isso resolveria parte do problema. Suponhamos que utilizaremos a prefixação citada acima, separando o nome do identificador por `_` (underline). Teríamos o seguinte resultado:
+Ainda existem convenções de como esses prefixos são concatenados com os nomes propriamente ditos dos identificadores: alguns separam os prefixos do nome de identificador usando `_` (underline), outros por `Capitalização` (prefixo minúsculo e primeiro caractere do identificador em Maiúsculo).
+
+Exemplo para prefixos de tipo de dado:
+Uma variável do tipo `inteiro` chamada `valor`, poderia ser `i_valor` ou `iValor`.
+
+Exemplo para prefixos de tipo de item:
+Um método chamador `contar`, poderia ser `m_contar` ou `mContar`.
+
+Isso resolveria parte do problema. Suponhamos que utilizaremos a prefixação de tipo de item citada acima, separando o nome do identificador por `_` (underline). Teríamos o seguinte resultado:
 
 ```csharp
 namespace My.Namespace
 {
     public class MyClass
     {
-        int i_count;
+        int v_count;
 
-        public int m_count(int i_count)
+        public int m_count(int v_count)
         {
-            int i_count = i_count;
+            int v_count = v_count;
+            return v_count;
         }
-        
-        public int count
+
+        public int p_count
         {
-            get { return count; }
+            get { return v_count; }
         }
     }
 }
