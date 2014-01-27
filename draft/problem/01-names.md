@@ -26,3 +26,5 @@ namespace My.Namespace
     }
 }
 ```
+
+Veja a solução para este problema [aqui](../solution/01-names.md).
