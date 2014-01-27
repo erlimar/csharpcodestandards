@@ -1,5 +1,7 @@
 ## Solução 01: `NOMES`
 
+Esta é a solução para o problema apresentado [aqui](../problem/01-names.md).
+
 #### Mas primeiro... `uma estorinha`...
 
 Ao tentar compilar o exemplo pela primeira vez, o compilador irá informar que não é possível definir a função `public int count()` porque já há uma definição no mesmo escopo com esse nome (no caso a propriedade `public int count{}`).
